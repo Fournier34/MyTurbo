@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyTurbo - Solutions Marketing Digital Pour Votre Entreprise</title>
+    <style>
+        :root {
+            --primary-color: #ff6600;
+            --secondary-color: #2a3990;
+            --dark-color: #333;
+            --light-color: #f4f4f4;
+            --success-color: #28a745;
+            --max-width: 1200px;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-color);
+        }
+        
+        a {
+            text-decoration: none;
+            color: var(--dark-color);
+        }
+        
+        ul {
+            list-style: none;
+        }
+        
+        img {
+            max-width: 100%;
+        }
+        
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 2rem;
+            overflow: hidden;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 1.5rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            background: #e55c00;
+            transform: translateY(-3px);
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+        
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+            color: var(--dark-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: normal;
+            color: #666;
+        }
+        
+        /* Header */
+        #header {
+            position: fixed;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        #navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+        
+        #navbar .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        #navbar ul {
+            display: flex;
+        }
+        
+        #navbar ul li a {
+            padding: 0.75rem 1rem;
+            margin: 0 0.25rem;
+            font-weight: 500;
+        }
+        
+        #navbar ul li a:hover {
+            color: var(--primary-color);
+        }
+        
+        #mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+        
+        /* Hero */
+        #hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1920/1080') no-repeat center center/cover;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+            padding: 0 2rem;
+        }
+        
+        #hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        #hero p {
+            font-size: 1.5rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+        
+        /* Services */
+        #services {
+            padding: 6rem 0;
+        }
+        
+        .services-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .service-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .service-box h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        /* Offres */
+        #offres {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+        
+        .offres-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .offre-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .offre-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .offre-popular {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            font-size: 0.8rem;
+            transform: rotate(45deg) translateX(20%) translateY(-35%);
+            width: 150px;
+            text-align: center;
+        }
+        
+        .offre-price {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin: 1rem 0;
+        }
+        
+        .offre-price span {
+            font-size: 1rem;
+            color: #666;
+        }
+        
+        .offre-features {
+            margin: 1.5rem 0;
+        }
+        
+        .offre-features li {
+            margin-bottom: 0.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        /* Portfolio */
+        #portfolio {
+            padding: 6rem 0;
+        }
+        
+        .portfolio-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .portfolio-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            height: 250px;
+        }
+        
+        .portfolio-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .portfolio-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 102, 0, 0.8);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            padding: 1rem;
+        }
+        
+        .portfolio-item:hover .portfolio-overlay {
+            opacity: 1;
+        }
+        
+        .portfolio-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        /* About */
+        #about {
+            padding: 6rem 0;
+            background: var(--light-color);
+        }
+        
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .about-content h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .about-content p {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Testimonials */
+        #testimonials {
+            padding: 6rem 0;
+            background: linear-gradient(135deg, #ff6600 0%, #ff9900 100%);
+            color: white;
+        }
+        
+        .testimonials-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-author img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin-right: 1rem;
+            object-fit: cover;
+        }
+        
+        /* Contact */
+        #contact {
+            padding: 6rem 0;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 4rem;
+        }
+        
+        .contact-info h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        
+        .contact-info p {
+            margin-bottom: 2rem;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-details span {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 0.5rem;
+            color: var(--primary-color);
+        }
+        
+        .contact-form .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .contact-form label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            height: 150px;
+        }
+        
+        /* Footer */
+        #footer {
+            background: var(--dark-color);
+            color: white;
+            padding: 3rem 0;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-column ul li a {
+            color: #ccc;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            #navbar ul {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                flex-direction: column;
+                text-align: center;
+                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            }
+            
+            #navbar ul.show {
+                display: flex;
+            }
+            
+            #navbar ul li {
+                border-top: 1px solid #eee;
+            }
+            
+            #navbar ul li a {
+                display: block;
+                padding: 1rem;
+            }
+            
+            #mobile-menu {
+                display: block;
+            }
+            
+            #hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            #hero p {
+                font-size: 1.2rem;
+            }
+            
+            .about-container,
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <nav id="navbar">
+                <h1 class="logo">MyTurbo</h1>
+                <ul>
+                    <li><a href="#hero">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#offres">Offres</a></li>
+                    <li><a href="#portfolio">Réalisations</a></li>
+                    <li><a href="#about">À Propos</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+                <div id="mobile-menu">Menu</div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <h1>MyTurbo - Boostez votre Business Digital</h1>
+        <p>Solutions innovantes de marketing digital pour transformer votre présence en ligne et accélérer votre croissance</p>
+        <div>
+            <a href="#contact" class="btn">Demander un devis</a>
+            <a href="#services" class="btn btn-outline">Découvrir nos services</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="container">
+            <h2 class="section-title">Nos Services</h2>
+            <h3 class="section-subtitle">Des solutions adaptées pour accélérer votre business</h3>
+            <div class="services-container">
+                <div class="service-box">
+                    <div class="service-icon">🚀</div>
+                    <h3>Création de sites web</h3>
+                    <p>Sites vitrines, e-commerce ou sur-mesure. Nos sites sont optimisés, responsive et prêts à convertir vos visiteurs en clients.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">🔍</div>
+                    <h3>Référencement (SEO)</h3>
+                    <p>Optimisation technique, stratégie de contenu et netlinking pour améliorer votre visibilité sur les moteurs de recherche.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">📊</div>
+                    <h3>Google Ads (SEA)</h3>
+                    <p>Campagnes publicitaires ciblées pour générer du trafic qualifié et maximiser votre retour sur investissement.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">📱</div>
+                    <h3>Réseaux sociaux</h3>
+                    <p>Gestion de vos profils sociaux, création de contenu et stratégies d'engagement pour développer votre communauté.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">✏️</div>
+                    <h3>Content marketing</h3>
+                    <p>Création de contenus pertinents et engageants pour attirer et fidéliser votre audience cible.</p>
+                </div>
+                <div class="service-box">
+                    <div class="service-icon">📈</div>
+                    <h3>Web analytics</h3>
+                    <p>Analyse de votre performance digitale et recommandations stratégiques pour optimiser vos résultats.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Offres Section -->
+    <section id="offres">
+        <div class="container">
+            <h2 class="section-title">Nos Offres</h2>
+            <h3 class="section-subtitle">Choisissez la formule adaptée à vos besoins</h3>
+            <div class="offres-container">
+                <div class="offre-box">
+                    <h3>Offre Starter</h3>
+                    <div class="offre-price">499€<span>/mois</span></div>
+                    <div class="offre-features">
+                        <ul>
+                            <li>Site web responsive</li>
+                            <li>Optimisation SEO de base</li>
+                            <li>Configuration Google Analytics</li>
+                            <li>1 Réseau social géré</li>
+                            <li>Support par email</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn">Demander un devis</a>
+                </div>
+                <div class="offre-box">
+                    <div class="offre-popular">Populaire</div>
+                    <h3>Offre Business</h3>
+                    <div class="offre-price">999€<span>/mois</span></div>
+                    <div class="offre-features">
+                        <ul>
+                            <li>Site web responsive avancé</li>
+                            <li>Optimisation SEO complète</li>
+                            <li>Campagne Google Ads</li>
+                            <li>3 Réseaux sociaux gérés</li>
+                            <li>Création de contenu hebdomadaire</li>
+                            <li>Rapports mensuels détaillés</li>
+                            <li>Support prioritaire</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn">Demander un devis</a>
+                </div>
+                <div class="offre-box">
+                    <h3>Offre Enterprise</h3>
+                    <div class="offre-price">Sur mesure</div>
+                    <div class="offre-features">
+                        <ul>
+                            <li>Site web sur mesure</li>
+                            <li>Stratégie SEO personnalisée</li>
+                            <li>Campagnes publicitaires avancées</li>
+                            <li>Gestion complète des réseaux sociaux</li>
+                            <li>Stratégie de contenu intégrée</li>
+                            <li>Analyses et rapports hebdomadaires</li>
+                            <li>Accompagnement stratégique</li>
+                            <li>Support dédié 24/7</li>
+                        </ul>
+                    </div>
+                    <a href="#contact" class="btn">Contactez-nous</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio">
+        <div class="container">
+            <h2 class="section-title">Nos Réalisations</h2>
+            <h3 class="section-subtitle">Découvrez nos projets récents</h3>
+            <div class="portfolio-container">
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet E-commerce">
+                    <div class="portfolio-overlay">
+                        <h3>Site E-commerce Mode</h3>
+                        <p>Refonte complète et stratégie SEO</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet Marketing">
+                    <div class="portfolio-overlay">
+                        <h3>Campagne Google Ads</h3>
+                        <p>+200% de conversions en 3 mois</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet Social Media">
+                    <div class="portfolio-overlay">
+                        <h3>Stratégie Social Media</h3>
+                        <p>Augmentation de l'engagement de 150%</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet SEO">
+                    <div class="portfolio-overlay">
+                        <h3>Optimisation SEO</h3>
+                        <p>Top 3 Google pour 50 mots-clés</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet Site Web">
+                    <div class="portfolio-overlay">
+                        <h3>Site Web Immobilier</h3>
+                        <p>Design moderne et génération de leads</p>
+                    </div>
+                </div>
+                <div class="portfolio-item">
+                    <img src="/api/placeholder/600/400" alt="Projet Content Marketing">
+                    <div class="portfolio-overlay">
+                        <h3>Stratégie de Contenu</h3>
+                        <p>Blog générant 5000 visites/mois</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <div class="about-container">
+                <div class="about-image">
+                    <img src="/api/placeholder/600/600" alt="L'équipe MyTurbo">
+                </div>
+                <div class="about-content">
+                    <h2>À Propos de MyTurbo</h2>
+                    <p>Fondée en 2022, MyTurbo est une agence digitale spécialisée dans les stratégies marketing innovantes et efficaces. Notre mission est d'aider les entreprises à développer leur présence en ligne et à générer une croissance durable.</p>
+                    <p>Notre équipe est composée d'experts passionnés dans différents domaines du marketing digital, du développement web et de la création de contenu. Nous combinons expertise technique, créativité et une approche orientée résultats pour offrir à nos clients des solutions sur mesure.</p>
+                    <p>Chez MyTurbo, nous croyons en une relation transparente et collaborative avec nos clients. Votre succès est notre succès, c'est pourquoi nous nous engageons à fournir un service de qualité supérieure et des résultats mesurables.</p>
+                    <a href="#contact" class="btn">Discuter de votre projet</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials">
+        <div class="container">
+            <h2 class="section-title">Témoignages</h2>
+            <h3 class="section-subtitle">Ce que nos clients disent de nous</h3>
+            <div class="testimonials-container">
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"L'équipe de MyTurbo a complètement transformé notre présence en ligne. Notre trafic web a augmenté de 180% et nos ventes en ligne ont doublé en seulement 6 mois!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="Client 1">
+                        <div>
+                            <h4>Marc Dubois</h4>
+                            <p>Directeur, ModeShop</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Leur expertise en SEO est impressionnante. Nous sommes maintenant en première page pour tous nos mots-clés stratégiques, ce qui a considérablement augmenté notre visibilité."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="Client 2">
+                        <div>
+                            <h4>Sarah Lefort</h4>
+                            <p>CMO, Tech Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <div class="testimonial-content">
+                        <p>"Un partenaire fiable et réactif. MyTurbo comprend nos besoins et propose des solutions adaptées à notre budget. Je les recommande sans hésitation!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="/api/placeholder/100/100" alt="Client 3">
+                        <div>
+                            <h4>Julie Martin</h4>
+                            <p>Fondatrice, StartGreen</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Contactez-nous</h2>
+            <h3 class="section-subtitle">Discutons de votre projet</h3>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Prenons contact</h3>
+                    <p>Vous avez un projet en tête ? Vous souhaitez améliorer votre présence digitale ? N'hésitez pas à nous contacter pour discuter de vos besoins et objectifs.</p>
+                    <div class="contact-details">
+                        <span><i>📍</i> 75 Rue du Marketing, 75000 Paris</span>
+                        <span><i>📞</i> +33 1 23 45 67 89</span>
+                        <span><i>📧</i> contact@myturbo.fr</span>
+                        <span><i>🕒</i> Lun-Ven: 9h-18h</span>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">Nom</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Téléphone</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Sujet</label>
+                            <input type="text" id="subject" name="subject" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>MyTurbo</h3>
+                    <p>Votre partenaire pour accélérer votre croissance digitale et transformer votre présence en ligne.</p>
+                    <div class="social-links">
+                        <a href="#"><span>f</span></a>
+                        <a href="#"><span>t</span></a>
+                        <a href="#"><span>in</span></a>
+                        <a href="#"><span>ig</span></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#services">Création de sites web</a></li>
+                        <li><a href="#services">Référencement SEO</a></li>
+                        <li><a href="#services">Google Ads</a></li>
+                        <li><a href="#services">Réseaux sociaux</a></li>
+                        <li><a href="#services">Content marketing</a></li>
+                    </ul>
+                </div>
