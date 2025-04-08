@@ -4,31 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyTurbo - Solutions Marketing Digital Pour Votre Entreprise</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
     <style>
         :root {
             --primary-color: #ff6600;
             --secondary-color: #2a3990;
             --dark-color: #333;
-            --light-color: #f4f4f4;
+            --light-color: #f8f9fa;
             --success-color: #28a745;
             --max-width: 1200px;
+            --transition: all 0.3s ease;
         }
         
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
         
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--dark-color);
+            overflow-x: hidden;
         }
         
         a {
             text-decoration: none;
             color: var(--dark-color);
+            transition: var(--transition);
         }
         
         ul {
@@ -47,7 +53,8 @@
         }
         
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
             padding: 0.75rem 1.5rem;
             background: var(--primary-color);
             color: white;
@@ -55,12 +62,25 @@
             border: none;
             cursor: pointer;
             font-size: 1rem;
-            transition: all 0.3s ease;
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         
         .btn:hover {
             background: #e55c00;
             transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+        
+        .btn span {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .btn:hover span {
+            transform: scale(1.2);
         }
         
         .btn-outline {
@@ -74,18 +94,64 @@
             color: white;
         }
         
+        .btn-secondary {
+            background: var(--secondary-color);
+        }
+        
+        .btn-secondary:hover {
+            background: #232e70;
+        }
+        
         .section-title {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             font-size: 2.5rem;
             color: var(--dark-color);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .title-container {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .title-emoji {
+            display: inline-block;
+            font-size: 2rem;
+            margin: 0 0.5rem;
+            animation: swing 2s infinite;
+        }
+        
+        @keyframes swing {
+            15% {
+                transform: translateX(5px);
+            }
+            30% {
+                transform: translateX(-5px);
+            }
+            50% {
+                transform: translateX(3px);
+            }
+            65% {
+                transform: translateX(-3px);
+            }
+            80% {
+                transform: translateX(2px);
+            }
+            100% {
+                transform: translateX(0);
+            }
         }
         
         .section-subtitle {
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 3rem;
             font-weight: normal;
             color: #666;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         /* Header */
@@ -95,6 +161,12 @@
             background: rgba(255, 255, 255, 0.95);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             z-index: 100;
+            transition: var(--transition);
+        }
+        
+        #header.scrolled {
+            padding: 0.5rem 0;
+            background: rgba(255, 255, 255, 0.98);
         }
         
         #navbar {
@@ -108,6 +180,20 @@
             font-size: 1.8rem;
             font-weight: bold;
             color: var(--primary-color);
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo-emoji {
+            font-size: 1.8rem;
+            margin-right: 0.5rem;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
         
         #navbar ul {
@@ -118,6 +204,12 @@
             padding: 0.75rem 1rem;
             margin: 0 0.25rem;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        #navbar ul li a span {
+            margin-right: 0.4rem;
         }
         
         #navbar ul li a:hover {
@@ -127,12 +219,13 @@
         #mobile-menu {
             display: none;
             cursor: pointer;
+            font-size: 1.5rem;
         }
         
         /* Hero */
         #hero {
             height: 100vh;
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('/api/placeholder/1920/1080') no-repeat center center/cover;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, #6366f1 100%);
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -140,6 +233,47 @@
             color: white;
             text-align: center;
             padding: 0 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .particles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            font-size: 1.5rem;
+            animation: float 15s linear infinite;
+            opacity: 0.4;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-20vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+        
+        #hero .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
         }
         
         #hero h1 {
@@ -147,15 +281,42 @@
             margin-bottom: 1rem;
         }
         
+        .hero-emoji {
+            font-size: 2.5rem;
+            display: inline-block;
+            margin: 0 0.5rem;
+            animation: bounce 2s ease infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        
         #hero p {
             font-size: 1.5rem;
             max-width: 600px;
-            margin-bottom: 2rem;
+            margin: 0 auto 2rem;
+        }
+        
+        #hero .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
         
         /* Services */
         #services {
             padding: 6rem 0;
+            background-color: white;
         }
         
         .services-container {
@@ -168,25 +329,61 @@
             background: white;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid #eee;
         }
         
         .service-box:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
         }
         
-        .service-icon {
+        .service-emoji {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--primary-color);
+            display: inline-block;
+            transition: var(--transition);
+        }
+        
+        .service-box:hover .service-emoji {
+            transform: rotate(15deg) scale(1.2);
         }
         
         .service-box h3 {
-            margin-bottom: 1rem;
             font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        
+        .service-list {
+            list-style: none;
+            text-align: left;
+            padding-left: 0.5rem;
+            margin: 1rem 0 2rem;
+        }
+        
+        .service-list li {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .service-list li::before {
+            content: "✓";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
         }
         
         /* Offres */
@@ -205,16 +402,18 @@
             background: white;
             padding: 2rem;
             border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            transition: all 0.3s ease;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
+            border: 1px solid #eee;
         }
         
         .offre-box:hover {
             transform: translateY(-10px);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
         }
         
         .offre-popular {
@@ -228,6 +427,12 @@
             transform: rotate(45deg) translateX(20%) translateY(-35%);
             width: 150px;
             text-align: center;
+        }
+        
+        .offre-box h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
         }
         
         .offre-price {
@@ -255,6 +460,7 @@
         /* Portfolio */
         #portfolio {
             padding: 6rem 0;
+            background-color: white;
         }
         
         .portfolio-container {
@@ -268,6 +474,13 @@
             overflow: hidden;
             border-radius: 10px;
             height: 250px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+        
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
         .portfolio-item img {
@@ -315,9 +528,24 @@
             align-items: center;
         }
         
+        .about-image {
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
         .about-content h2 {
             font-size: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary-color);
         }
         
         .about-content p {
@@ -327,7 +555,7 @@
         /* Testimonials */
         #testimonials {
             padding: 6rem 0;
-            background: linear-gradient(135deg, #ff6600 0%, #ff9900 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, #ff9900 100%);
             color: white;
         }
         
@@ -342,6 +570,13 @@
             padding: 2rem;
             border-radius: 10px;
             position: relative;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .testimonial:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
         }
         
         .testimonial-content {
@@ -360,11 +595,13 @@
             border-radius: 50%;
             margin-right: 1rem;
             object-fit: cover;
+            border: 2px solid white;
         }
         
         /* Contact */
         #contact {
             padding: 6rem 0;
+            background-color: white;
         }
         
         .contact-container {
@@ -374,8 +611,9 @@
         }
         
         .contact-info h3 {
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
         }
         
         .contact-info p {
@@ -388,14 +626,16 @@
         }
         
         .contact-details span {
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
+            font-size: 1.1rem;
         }
         
-        .contact-details i {
-            margin-right: 0.5rem;
+        .contact-details span i {
+            margin-right: 1rem;
             color: var(--primary-color);
+            font-size: 1.3rem;
         }
         
         .contact-form .form-group {
@@ -415,6 +655,14 @@
             border: 1px solid #ddd;
             border-radius: 5px;
             font-family: inherit;
+            transition: var(--transition);
+        }
+        
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 102, 0, 0.1);
         }
         
         .contact-form textarea {
@@ -425,7 +673,7 @@
         #footer {
             background: var(--dark-color);
             color: white;
-            padding: 3rem 0;
+            padding: 4rem 0 2rem;
         }
         
         .footer-container {
@@ -437,6 +685,12 @@
         .footer-column h3 {
             margin-bottom: 1.5rem;
             font-size: 1.2rem;
+            color: #fff;
+        }
+        
+        .footer-column p {
+            color: #ccc;
+            margin-bottom: 1.5rem;
         }
         
         .footer-column ul li {
@@ -467,7 +721,7 @@
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.1);
             color: white;
-            transition: all 0.3s ease;
+            transition: var(--transition);
         }
         
         .social-links a:hover {
@@ -480,9 +734,123 @@
             padding-top: 2rem;
             margin-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #aaa;
         }
         
-        /* Responsive */
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 50px;
+            height: 50px;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: var(--transition);
+            transform: translateY(20px);
+            z-index: 99;
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .back-to-top:hover {
+            background: #e55c00;
+        }
+        
+        /* Contact CTA Floating */
+        .floating-cta {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            background: var(--primary-color);
+            color: white;
+            border-radius: 30px;
+            padding: 0.75rem 1.5rem;
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 99;
+            transition: var(--transition);
+        }
+        
+        .floating-cta span {
+            margin-right: 0.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .floating-cta:hover {
+            background: #e55c00;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Cookie consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 1rem 2rem;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transform: translateY(100%);
+            transition: transform 0.5s ease;
+        }
+        
+        .cookie-consent.show {
+            transform: translateY(0);
+        }
+        
+        .cookie-text {
+            flex: 1;
+            margin-right: 2rem;
+        }
+        
+        .cookie-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        /* Animation styles */
+        [data-aos] {
+            pointer-events: none;
+        }
+        
+        [data-aos].aos-animate {
+            pointer-events: auto;
+        }
+        
+        /* Responsive styles */
+        @media (max-width: 992px) {
+            .about-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .about-image {
+                order: 2;
+            }
+            
+            .about-content {
+                order: 1;
+            }
+        }
+        
         @media (max-width: 768px) {
             #navbar ul {
                 display: none;
@@ -521,9 +889,47 @@
                 font-size: 1.2rem;
             }
             
-            .about-container,
             .contact-container {
                 grid-template-columns: 1fr;
+            }
+            
+            .floating-cta {
+                left: 1rem;
+                right: 1rem;
+                bottom: 1rem;
+                width: calc(100% - 2rem);
+                justify-content: center;
+            }
+            
+            .back-to-top {
+                bottom: 5rem;
+            }
+            
+            .cookie-consent {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .cookie-text {
+                margin-right: 0;
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            #hero .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            #hero .btn {
+                width: 100%;
+                margin-bottom: 1rem;
+                justify-content: center;
             }
         }
     </style>
@@ -533,415 +939,22 @@
     <header id="header">
         <div class="container">
             <nav id="navbar">
-                <h1 class="logo">MyTurbo</h1>
+                <h1 class="logo"><span class="logo-emoji">🚀</span>MyTurbo</h1>
                 <ul>
-                    <li><a href="#hero">Accueil</a></li>
-                    <li><a href="#services">Services</a></li>
-                    <li><a href="#offres">Offres</a></li>
-                    <li><a href="#portfolio">Réalisations</a></li>
-                    <li><a href="#about">À Propos</a></li>
-                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="#hero"><span>🏠</span>Accueil</a></li>
+                    <li><a href="#services"><span>🛠️</span>Services</a></li>
+                    <li><a href="#offres"><span>💼</span>Offres</a></li>
+                    <li><a href="#portfolio"><span>🖼️</span>Réalisations</a></li>
+                    <li><a href="#about"><span>👋</span>À Propos</a></li>
+                    <li><a href="#contact"><span>📞</span>Contact</a></li>
                 </ul>
-                <div id="mobile-menu">Menu</div>
+                <div id="mobile-menu"><i class="fas fa-bars"></i></div>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
     <section id="hero">
-        <h1>MyTurbo - Boostez votre Business Digital</h1>
-        <p>Solutions innovantes de marketing digital pour transformer votre présence en ligne et accélérer votre croissance</p>
-        <div>
-            <a href="#contact" class="btn">Demander un devis</a>
-            <a href="#services" class="btn btn-outline">Découvrir nos services</a>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Turbo - Agence Digitale</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            line-height: 1.6;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .navbar {
-            background-color: #fff;
-            padding: 1rem;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            z-index: 1000;
-        }
-
-        .navbar-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #333;
-            display: flex;
-            align-items: center;
-        }
-        
-        .logo-emoji {
-            font-size: 1.8rem;
-            margin-right: 0.5rem;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            text-decoration: none;
-            color: #333;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-        }
-        
-        .nav-links a span {
-            margin-right: 0.4rem;
-        }
-
-        .hero {
-            height: 100vh;
-            background: linear-gradient(135deg, #2a3990 0%, #6366f1 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            color: white;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .particles {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-        
-        .particle {
-            position: absolute;
-            font-size: 1.5rem;
-            animation: float 15s linear infinite;
-            opacity: 0.4;
-        }
-        
-        @keyframes float {
-            0% {
-                transform: translateY(100vh) rotate(0deg);
-                opacity: 0;
-            }
-            10% {
-                opacity: 0.6;
-            }
-            90% {
-                opacity: 0.6;
-            }
-            100% {
-                transform: translateY(-20vh) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        .hero-content {
-            max-width: 800px;
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-        
-        .hero-emoji {
-            font-size: 2.5rem;
-            display: inline-block;
-            margin: 0 0.5rem;
-            animation: bounce 2s ease infinite;
-        }
-        
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateY(0);
-            }
-            40% {
-                transform: translateY(-20px);
-            }
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Services styles from the provided code */
-        #services {
-            padding: 6rem 0;
-            background: #f9f9f9;
-        }
-        
-        .services-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-        
-        .service-box {
-            background: white;
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .service-box:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-        
-        .service-emoji {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            display: inline-block;
-            transition: transform 0.3s ease;
-        }
-        
-        .service-box:hover .service-emoji {
-            transform: rotate(15deg) scale(1.2);
-        }
-        
-        .service-box h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #2a3990;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-        
-        .service-list {
-            list-style: none;
-            text-align: left;
-            padding-left: 0.5rem;
-            margin: 1rem 0 2rem;
-        }
-        
-        .service-list li {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
-            color: #333;
-            display: flex;
-            align-items: center;
-        }
-        
-        .service-list li::before {
-            content: "✓";
-            color: #2a3990;
-            font-weight: bold;
-            margin-right: 0.5rem;
-        }
-        
-        .btn-outline {
-            display: inline-block;
-            padding: 0.75rem 1.5rem;
-            background: transparent;
-            border: 1px solid #2a3990;
-            color: #2a3990;
-            border-radius: 5px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-            z-index: 1;
-        }
-        
-        .btn-outline::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 0;
-            background: #2a3990;
-            transition: all 0.3s ease;
-            z-index: -1;
-        }
-        
-        .btn-outline:hover {
-            color: white;
-        }
-        
-        .btn-outline:hover::after {
-            height: 100%;
-        }
-        
-        .section-title {
-            text-align: center;
-            margin-bottom: 1rem;
-            font-size: 2.5rem;
-            color: #333;
-            position: relative;
-            display: inline-block;
-        }
-        
-        .title-container {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .title-emoji {
-            display: inline-block;
-            font-size: 2rem;
-            margin: 0 0.5rem;
-            animation: swing 2s infinite;
-        }
-        
-        @keyframes swing {
-            15% {
-                transform: translateX(5px);
-            }
-            30% {
-                transform: translateX(-5px);
-            }
-            50% {
-                transform: translateX(3px);
-            }
-            65% {
-                transform: translateX(-3px);
-            }
-            80% {
-                transform: translateX(2px);
-            }
-            100% {
-                transform: translateX(0);
-            }
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            margin-bottom: 3rem;
-            font-weight: normal;
-            color: #666;
-        }
-
-        .contact {
-            background: #f8f9fa;
-            padding: 5rem 2rem;
-            text-align: center;
-        }
-
-        .contact h2 {
-            margin-bottom: 2rem;
-            color: #333;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            background: #2a3990;
-            color: white;
-            padding: 0.8rem 2rem;
-            border-radius: 5px;
-            text-decoration: none;
-            margin-top: 1rem;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .cta-button span {
-            margin-right: 0.5rem;
-            transition: transform 0.3s ease;
-        }
-        
-        .cta-button:hover span {
-            transform: scale(1.2);
-        }
-
-        .cta-button:hover {
-            background: #1a2870;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(42, 57, 144, 0.4);
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .nav-links {
-                display: none;
-            }
-            
-            .services-container {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
-</head>
-<body>
-    <nav class="navbar">
-        <div class="navbar-content">
-            <div class="logo">
-                <span class="logo-emoji">🚀</span>
-                My Turbo
-            </div>
-            <div class="nav-links">
-                <a href="#services"><span>🛠️</span>Services</a>
-                <a href="#contact"><span>📞</span>Contact</a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero">
         <div class="particles">
             <span class="particle" style="left:10%; animation-delay: 0s;">💻</span>
             <span class="particle" style="left:25%; animation-delay: 2s;">📱</span>
@@ -953,12 +966,16 @@
             <span class="particle" style="left:75%; animation-delay: 14s;">🌟</span>
         </div>
         <div class="hero-content">
-            <h1>Boostez votre présence digitale <span class="hero-emoji">🚀</span></h1>
-            <p>My Turbo, votre partenaire pour une transformation digitale réussie</p>
-            <a href="#contact" class="cta-button"><span>✉️</span>Contactez-nous</a>
+            <h1>Boostez votre Business Digital <span class="hero-emoji">🚀</span></h1>
+            <p>Solutions innovantes de marketing digital pour transformer votre présence en ligne et accélérer votre croissance</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn"><span>✉️</span>Demander un devis</a>
+                <a href="#services" class="btn btn-outline"><span>🔍</span>Découvrir nos services</a>
+            </div>
         </div>
     </section>
 
+    <!-- Services Section -->
     <section id="services">
         <div class="container">
             <div class="title-container">
@@ -966,151 +983,134 @@
                 <h2 class="section-title">Nos Services</h2>
                 <span class="title-emoji">✨</span>
             </div>
-            <h3 class="section-subtitle">Parce que c'est toujours mieux si on vous les présente.</h3>
+            <h3 class="section-subtitle">Des solutions digitales complètes pour répondre à tous vos besoins marketing et communication</h3>
             <div class="services-container">
                 <div class="service-box" data-aos="fade-up">
                     <div class="service-emoji">📸</div>
-                    <h3>Photo</h3>
+                    <h3>Photographie</h3>
                     <ul class="service-list">
-                        <li>Portraits</li>
-                        <li>Produits</li>
-                        <li>Souvenirs</li>
+                        <li>Portraits professionnels</li>
+                        <li>Photos de produits e-commerce</li>
+                        <li>Reportages d'événements</li>
+                        <li>Retouches et édition</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
                 
                 <div class="service-box" data-aos="fade-up" data-aos-delay="100">
                     <div class="service-emoji">💻</div>
-                    <h3>Création de site internet</h3>
+                    <h3>Création Web</h3>
                     <ul class="service-list">
-                        <li>Vitrine</li>
-                        <li>Plateforme E Commerce</li>
-                        <li>Hébergement et maintenance</li>
+                        <li>Sites vitrines responsive</li>
+                        <li>Boutiques e-commerce</li>
+                        <li>Applications web sur mesure</li
+                                                           <li>Applications web sur mesure</li>
+                        <li>Maintenance et mises à jour</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
                 
                 <div class="service-box" data-aos="fade-up" data-aos-delay="200">
-                    <div class="service-emoji">🎉</div>
-                    <h3>Événementiel</h3>
+                    <div class="service-emoji">🔍</div>
+                    <h3>Référencement SEO</h3>
                     <ul class="service-list">
-                        <li>Afterwork et repas d'entreprise</li>
-                        <li>Séminaires et congrès</li>
-                        <li>Demande sur mesure</li>
+                        <li>Audit et stratégie SEO</li>
+                        <li>Optimisation on-page</li>
+                        <li>Création de contenu optimisé</li>
+                        <li>Suivi et reporting</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
                 
                 <div class="service-box" data-aos="fade-up" data-aos-delay="300">
                     <div class="service-emoji">📱</div>
-                    <h3>Réseaux sociaux</h3>
+                    <h3>Réseaux Sociaux</h3>
                     <ul class="service-list">
+                        <li>Gestion de communauté</li>
                         <li>Création de contenu</li>
-                        <li>Gestion CM</li>
-                        <li>Social Ads</li>
+                        <li>Stratégie publicitaire</li>
+                        <li>Veille et analyses</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
                 
                 <div class="service-box" data-aos="fade-up" data-aos-delay="400">
-                    <div class="service-emoji">🎓</div>
-                    <h3>Formation</h3>
+                    <div class="service-emoji">📊</div>
+                    <h3>Analytics & Data</h3>
                     <ul class="service-list">
-                        <li>WordPress</li>
-                        <li>Réseaux sociaux</li>
-                        <li>Outils CRM</li>
-                        <li>Power BI</li>
+                        <li>Installation et paramétrage</li>
+                        <li>Analyses et interprétations</li>
+                        <li>Tableaux de bord personnalisés</li>
+                        <li>Conseils d'optimisation</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
                 
                 <div class="service-box" data-aos="fade-up" data-aos-delay="500">
-                    <div class="service-emoji">🎨</div>
-                    <h3>Graphisme</h3>
+                    <div class="service-emoji">🎯</div>
+                    <h3>Marketing Digital</h3>
                     <ul class="service-list">
-                        <li>Logo</li>
-                        <li>Affiches</li>
+                        <li>Stratégie digitale complète</li>
+                        <li>Campagnes Google Ads</li>
+                        <li>Emailing et automation</li>
+                        <li>Inbound marketing</li>
                     </ul>
-                    <a href="#contact" class="btn-outline">En savoir plus</a>
+                    <a href="#contact" class="btn-outline"><span>👉</span>En savoir plus</a>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="contact" id="contact">
-        <div class="container">
-            <div class="title-container">
-                <span class="title-emoji">📬</span>
-                <h2 class="section-title">Contactez-nous</h2>
-                <span class="title-emoji">📬</span>
-            </div>
-            <p>Prêt à démarrer votre projet ? Contactez-nous pour une consultation gratuite.</p>
-            <a href="mailto:contact@myturbo.fr" class="cta-button"><span>📨</span>Envoyez-nous un message</a>
-        </div>
-    </section>
-
-    <script>
-        AOS.init({
-            duration: 800,
-            once: false,
-            mirror: true
-        });
-    </script>
-</body>
-</html>
     <!-- Offres Section -->
     <section id="offres">
         <div class="container">
-            <h2 class="section-title">Nos Offres</h2>
-            <h3 class="section-subtitle">Choisissez la formule adaptée à vos besoins</h3>
+            <div class="title-container">
+                <span class="title-emoji">💼</span>
+                <h2 class="section-title">Nos Offres</h2>
+                <span class="title-emoji">💼</span>
+            </div>
+            <h3 class="section-subtitle">Des formules adaptées à votre budget et à vos objectifs, pour un accompagnement sur mesure</h3>
             <div class="offres-container">
-                <div class="offre-box">
-                    <h3>Offre Starter</h3>
-                    <div class="offre-price">Sur Mesure<span>/mois</span></div>
-                    <div class="offre-features">
-                        <ul>
-                            <li>Site web responsive</li>
-                            <li>Optimisation SEO de base</li>
-                            <li>Configuration Google Analytics</li>
-                            <li>1 Réseau social géré</li>
-                            <li>Support par email</li>
-                        </ul>
-                    </div>
-                    <a href="#contact" class="btn">Demander un devis</a>
+                <div class="offre-box" data-aos="fade-up">
+                    <h3>Starter</h3>
+                    <div class="offre-price">499€ <span>/mois</span></div>
+                    <ul class="offre-features">
+                        <li>Site web vitrine (5 pages)</li>
+                        <li>Référencement local</li>
+                        <li>1 réseau social au choix</li>
+                        <li>Rapport mensuel</li>
+                        <li>Support par email</li>
+                    </ul>
+                    <a href="#contact" class="btn">Commencer</a>
                 </div>
-                <div class="offre-box">
+                
+                <div class="offre-box" data-aos="fade-up" data-aos-delay="100">
                     <div class="offre-popular">Populaire</div>
-                    <h3>Offre Business</h3>
-                    <div class="offre-price">Sur Mesure<span>/mois</span></div>
-                    <div class="offre-features">
-                        <ul>
-                            <li>Site web responsive avancé</li>
-                            <li>Optimisation SEO complète</li>
-                            <li>Campagne Google Ads</li>
-                            <li>3 Réseaux sociaux gérés</li>
-                            <li>Création de contenu hebdomadaire</li>
-                            <li>Rapports mensuels détaillés</li>
-                            <li>Support prioritaire</li>
-                        </ul>
-                    </div>
-                    <a href="#contact" class="btn">Demander un devis</a>
+                    <h3>Business</h3>
+                    <div class="offre-price">999€ <span>/mois</span></div>
+                    <ul class="offre-features">
+                        <li>Site web complet (10 pages)</li>
+                        <li>SEO avancé</li>
+                        <li>3 réseaux sociaux</li>
+                        <li>Campagne Google Ads</li>
+                        <li>Analytics & rapports</li>
+                        <li>Support prioritaire</li>
+                    </ul>
+                    <a href="#contact" class="btn">Commencer</a>
                 </div>
-                <div class="offre-box">
-                    <h3>Offre Enterprise</h3>
-                    <div class="offre-price">Sur mesure</div>
-                    <div class="offre-features">
-                        <ul>
-                            <li>Site web sur mesure</li>
-                            <li>Stratégie SEO personnalisée</li>
-                            <li>Campagnes publicitaires avancées</li>
-                            <li>Gestion complète des réseaux sociaux</li>
-                            <li>Stratégie de contenu intégrée</li>
-                            <li>Analyses et rapports hebdomadaires</li>
-                            <li>Accompagnement stratégique</li>
-                            <li>Support dédié 24/7</li>
-                        </ul>
-                    </div>
-                    <a href="#contact" class="btn">Contactez-nous</a>
+                
+                <div class="offre-box" data-aos="fade-up" data-aos-delay="200">
+                    <h3>Premium</h3>
+                    <div class="offre-price">1999€ <span>/mois</span></div>
+                    <ul class="offre-features">
+                        <li>Site web ou e-commerce</li>
+                        <li>Stratégie digitale complète</li>
+                        <li>Tous réseaux sociaux</li>
+                        <li>SEO & SEA professionnels</li>
+                        <li>Création de contenu</li>
+                        <li>Support dédié 24/7</li>
+                    </ul>
+                    <a href="#contact" class="btn">Commencer</a>
                 </div>
             </div>
         </div>
@@ -1119,49 +1119,58 @@
     <!-- Portfolio Section -->
     <section id="portfolio">
         <div class="container">
-            <h2 class="section-title">Nos Réalisations</h2>
-            <h3 class="section-subtitle">Découvrez nos projets récents</h3>
+            <div class="title-container">
+                <span class="title-emoji">🖼️</span>
+                <h2 class="section-title">Nos Réalisations</h2>
+                <span class="title-emoji">🖼️</span>
+            </div>
+            <h3 class="section-subtitle">Découvrez quelques-uns de nos projets récents qui ont boosté la visibilité de nos clients</h3>
             <div class="portfolio-container">
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet E-commerce">
+                <div class="portfolio-item" data-aos="zoom-in">
+                    <img src="/api/placeholder/400/320" alt="Projet E-commerce Mode">
                     <div class="portfolio-overlay">
-                        <h3>Site E-commerce Mode</h3>
-                        <p>Refonte complète et stratégie SEO</p>
+                        <h3>E-commerce Mode</h3>
+                        <p>Création d'une boutique en ligne et stratégie marketing pour une marque de vêtements</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet Marketing">
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="100">
+                    <img src="/api/placeholder/400/320" alt="Restaurant Local">
                     <div class="portfolio-overlay">
-                        <h3>Campagne Google Ads</h3>
-                        <p>+200% de conversions en 3 mois</p>
+                        <h3>Restaurant Local</h3>
+                        <p>Refonte du site web et campagne SEO pour un restaurant gastronomique</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet Social Media">
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="200">
+                    <img src="/api/placeholder/400/320" alt="Cabinet Juridique">
                     <div class="portfolio-overlay">
-                        <h3>Stratégie Social Media</h3>
-                        <p>Augmentation de l'engagement de 150%</p>
+                        <h3>Cabinet Juridique</h3>
+                        <p>Stratégie de contenu et référencement pour un cabinet d'avocats</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet SEO">
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="300">
+                    <img src="/api/placeholder/400/320" alt="Application Fitness">
                     <div class="portfolio-overlay">
-                        <h3>Optimisation SEO</h3>
-                        <p>Top 3 Google pour 50 mots-clés</p>
+                        <h3>Application Fitness</h3>
+                        <p>Développement d'une application mobile et stratégie d'acquisition</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet Site Web">
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="400">
+                    <img src="/api/placeholder/400/320" alt="Événementiel">
                     <div class="portfolio-overlay">
-                        <h3>Site Web Immobilier</h3>
-                        <p>Design moderne et génération de leads</p>
+                        <h3>Événementiel</h3>
+                        <p>Campagne social media et site web pour un festival local</p>
                     </div>
                 </div>
-                <div class="portfolio-item">
-                    <img src="/api/placeholder/600/400" alt="Projet Content Marketing">
+                
+                <div class="portfolio-item" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="/api/placeholder/400/320" alt="Startup Tech">
                     <div class="portfolio-overlay">
-                        <h3>Stratégie de Contenu</h3>
-                        <p>Blog générant 5000 visites/mois</p>
+                        <h3>Startup Tech</h3>
+                        <p>Identité visuelle et stratégie de lancement pour une startup</p>
                     </div>
                 </div>
             </div>
@@ -1171,16 +1180,21 @@
     <!-- About Section -->
     <section id="about">
         <div class="container">
+            <div class="title-container">
+                <span class="title-emoji">👋</span>
+                <h2 class="section-title">À Propos</h2>
+                <span class="title-emoji">👋</span>
+            </div>
             <div class="about-container">
-                <div class="about-image">
-                    <img src="/api/placeholder/600/600" alt="L'équipe MyTurbo">
+                <div class="about-image" data-aos="fade-right">
+                    <img src="/api/placeholder/600/400" alt="L'équipe MyTurbo">
                 </div>
-                <div class="about-content">
-                    <h2>À Propos de MyTurbo</h2>
-                    <p>Fondée en 2022, MyTurbo est une agence digitale spécialisée dans les stratégies marketing innovantes et efficaces. Notre mission est d'aider les entreprises à développer leur présence en ligne et à générer une croissance durable.</p>
-                    <p>Notre équipe est composée d'experts passionnés dans différents domaines du marketing digital, du développement web et de la création de contenu. Nous combinons expertise technique, créativité et une approche orientée résultats pour offrir à nos clients des solutions sur mesure.</p>
-                    <p>Chez MyTurbo, nous croyons en une relation transparente et collaborative avec nos clients. Votre succès est notre succès, c'est pourquoi nous nous engageons à fournir un service de qualité supérieure et des résultats mesurables.</p>
-                    <a href="#contact" class="btn">Discuter de votre projet</a>
+                <div class="about-content" data-aos="fade-left">
+                    <h2>Qui sommes-nous ?</h2>
+                    <p>Fondée en 2018, MyTurbo est une agence digitale passionnée par l'innovation et la performance. Notre équipe est composée d'experts en marketing digital, développement web, design et stratégie de contenu.</p>
+                    <p>Notre mission : transformer votre présence en ligne pour booster votre visibilité et votre croissance. Nous combinons créativité et données analytiques pour créer des stratégies sur mesure qui répondent à vos objectifs.</p>
+                    <p>Que vous soyez une startup ambitieuse ou une entreprise établie, nous vous accompagnons dans chaque étape de votre transformation digitale.</p>
+                    <a href="#contact" class="btn"><span>📞</span>Contactez-nous</a>
                 </div>
             </div>
         </div>
@@ -1189,42 +1203,48 @@
     <!-- Testimonials Section -->
     <section id="testimonials">
         <div class="container">
-            <h2 class="section-title">Témoignages</h2>
-            <h3 class="section-subtitle">Ce que nos clients disent de nous</h3>
+            <div class="title-container">
+                <span class="title-emoji">⭐</span>
+                <h2 class="section-title">Témoignages</h2>
+                <span class="title-emoji">⭐</span>
+            </div>
+            <h3 class="section-subtitle">Ce que nos clients disent de nous et de notre travail</h3>
             <div class="testimonials-container">
-                <div class="testimonial">
+                <div class="testimonial" data-aos="fade-up">
                     <div class="testimonial-content">
-                        <p>"L'équipe de MyTurbo a complètement transformé notre présence en ligne. Notre trafic web a augmenté de 180% et nos ventes en ligne ont doublé en seulement 6 mois!"</p>
+                        "Grâce à MyTurbo, notre trafic web a augmenté de 200% en seulement 3 mois. Leur expertise en SEO et réseaux sociaux a complètement transformé notre présence en ligne."
                     </div>
                     <div class="testimonial-author">
-                        <img src="/api/placeholder/100/100" alt="Client 1">
+                        <img src="/api/placeholder/60/60" alt="Sophie Martin">
                         <div>
-                            <h4>Marc Dubois</h4>
-                            <p>Directeur, ModeShop</p>
+                            <h4>Sophie Martin</h4>
+                            <p>PDG, Mode Élégance</p>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial">
+                
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="100">
                     <div class="testimonial-content">
-                        <p>"Leur expertise en SEO est impressionnante. Nous sommes maintenant en première page pour tous nos mots-clés stratégiques, ce qui a considérablement augmenté notre visibilité."</p>
+                        "Une équipe professionnelle et réactive qui a su comprendre nos besoins. Notre nouveau site e-commerce a dépassé toutes nos attentes en termes de design et de performance."
                     </div>
                     <div class="testimonial-author">
-                        <img src="/api/placeholder/100/100" alt="Client 2">
+                        <img src="/api/placeholder/60/60" alt="Thomas Dubois">
                         <div>
-                            <h4>Sarah Lefort</h4>
-                            <p>CMO, Tech Solutions</p>
+                            <h4>Thomas Dubois</h4>
+                            <p>Directeur, TechSolutions</p>
                         </div>
                     </div>
                 </div>
-                <div class="testimonial">
+                
+                <div class="testimonial" data-aos="fade-up" data-aos-delay="200">
                     <div class="testimonial-content">
-                        <p>"Un partenaire fiable et réactif. MyTurbo comprend nos besoins et propose des solutions adaptées à notre budget. Je les recommande sans hésitation!"</p>
+                        "Le ROI de nos campagnes marketing a été multiplié par 3 depuis que nous travaillons avec MyTurbo. Je recommande vivement leurs services à toute entreprise qui souhaite se développer en ligne."
                     </div>
                     <div class="testimonial-author">
-                        <img src="/api/placeholder/100/100" alt="Client 3">
+                        <img src="/api/placeholder/60/60" alt="Julie Leroux">
                         <div>
-                            <h4>Julie Martin</h4>
-                            <p>Fondatrice, StartGreen</p>
+                            <h4>Julie Leroux</h4>
+                            <p>Marketing Manager, Saveur Locale</p>
                         </div>
                     </div>
                 </div>
@@ -1235,42 +1255,48 @@
     <!-- Contact Section -->
     <section id="contact">
         <div class="container">
-            <h2 class="section-title">Contactez-nous</h2>
-            <h3 class="section-subtitle">Discutons de votre projet</h3>
+            <div class="title-container">
+                <span class="title-emoji">📞</span>
+                <h2 class="section-title">Contact</h2>
+                <span class="title-emoji">📞</span>
+            </div>
+            <h3 class="section-subtitle">Une question ? Un projet ? Contactez-nous pour en discuter</h3>
             <div class="contact-container">
-                <div class="contact-info">
-                    <h3>Prenons contact</h3>
-                    <p>Vous avez un projet en tête ? Vous souhaitez améliorer votre présence digitale ? N'hésitez pas à nous contacter pour discuter de vos besoins et objectifs.</p>
+                <div class="contact-info" data-aos="fade-right">
+                    <h3>Parlons de votre projet</h3>
+                    <p>Notre équipe est à votre disposition pour répondre à vos questions et vous accompagner dans la réalisation de vos projets digitaux.</p>
                     <div class="contact-details">
-                        <span><i>📍</i> 75 Rue du Marketing, 75000 Paris</span>
-                        <span><i>📞</i> +33 1 23 45 67 89</span>
-                        <span><i>📧</i> contact@myturbo.fr</span>
-                        <span><i>🕒</i> Lun-Ven: 9h-18h</span>
+                        <span><i class="fas fa-map-marker-alt"></i>123 Avenue Digitale, 75001 Paris</span>
+                        <span><i class="fas fa-phone"></i>+33 1 23 45 67 89</span>
+                        <span><i class="fas fa-envelope"></i>contact@myturbo.fr</span>
+                        <span><i class="fas fa-clock"></i>Lun-Ven: 9h-18h</span>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
+                <div class="contact-form" data-aos="fade-left">
+                    <form>
                         <div class="form-group">
                             <label for="name">Nom</label>
-                            <input type="text" id="name" name="name" required>
+                            <input type="text" id="name" placeholder="Votre nom">
                         </div>
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Téléphone</label>
-                            <input type="tel" id="phone" name="phone">
+                            <input type="email" id="email" placeholder="Votre email">
                         </div>
                         <div class="form-group">
                             <label for="subject">Sujet</label>
-                            <input type="text" id="subject" name="subject" required>
+                            <input type="text" id="subject" placeholder="Sujet de votre message">
                         </div>
                         <div class="form-group">
                             <label for="message">Message</label>
-                            <textarea id="message" name="message" required></textarea>
+                            <textarea id="message" placeholder="Votre message"></textarea>
                         </div>
-                        <button type="submit" class="btn">Envoyer</button>
+                        <button type="submit" class="btn btn-secondary"><span>✉️</span>Envoyer</button>
                     </form>
                 </div>
             </div>
@@ -1283,21 +1309,138 @@
             <div class="footer-container">
                 <div class="footer-column">
                     <h3>MyTurbo</h3>
-                    <p>Votre partenaire pour accélérer votre croissance digitale et transformer votre présence en ligne.</p>
+                    <p>Votre partenaire digital pour une croissance accélérée et durable.</p>
                     <div class="social-links">
-                        <a href="#"><span>f</span></a>
-                        <a href="#"><span>t</span></a>
-                        <a href="#"><span>in</span></a>
-                        <a href="#"><span>ig</span></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="footer-column">
                     <h3>Services</h3>
                     <ul>
-                        <li><a href="#services">Création de sites web</a></li>
-                        <li><a href="#services">Référencement SEO</a></li>
-                        <li><a href="#services">Google Ads</a></li>
-                        <li><a href="#services">Réseaux sociaux</a></li>
-                        <li><a href="#services">Content marketing</a></li>
+                        <li><a href="#">Photographie</a></li>
+                        <li><a href="#">Création Web</a></li>
+                        <li><a href="#">Référencement SEO</a></li>
+                        <li><a href="#">Réseaux Sociaux</a></li>
+                        <li><a href="#">Analytics & Data</a></li>
                     </ul>
                 </div>
+                <div class="footer-column">
+                    <h3>Liens Utiles</h3>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Portfolio</a></li>
+                        <li><a href="#">À Propos</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Newsletter</h3>
+                    <p>Abonnez-vous pour recevoir nos dernières actualités et conseils marketing</p>
+                    <form>
+                        <div class="form-group">
+                            <input type="email" placeholder="Votre email">
+                        </div>
+                        <button type="submit" class="btn">S'abonner</button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MyTurbo - Tous droits réservés</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <!-- Floating CTA -->
+    <a href="#contact" class="floating-cta">
+        <span>💬</span>Discutons de votre projet
+    </a>
+
+    <!-- Cookie Consent -->
+    <div class="cookie-consent">
+        <div class="cookie-text">
+            <p>Nous utilisons des cookies pour améliorer votre expérience sur notre site. En continuant à naviguer, vous acceptez notre utilisation des cookies.</p>
+        </div>
+        <div class="cookie-buttons">
+            <button class="btn btn-outline">Paramètres</button>
+            <button class="btn">Accepter</button>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize AOS animations
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init({
+                duration: 800,
+                easing: 'ease',
+                once: true,
+                offset: 100
+            });
+
+            // Mobile menu toggle
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navbarMenu = document.querySelector('#navbar ul');
+            
+            mobileMenu.addEventListener('click', function() {
+                navbarMenu.classList.toggle('show');
+            });
+
+            // Sticky header
+            const header = document.getElementById('header');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            });
+
+            // Back to top button
+            const backToTop = document.querySelector('.back-to-top');
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTop.classList.add('show');
+                } else {
+                    backToTop.classList.remove('show');
+                }
+            });
+
+            // Smooth scrolling
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    if (navbarMenu.classList.contains('show')) {
+                        navbarMenu.classList.remove('show');
+                    }
+                });
+            });
+
+            // Cookie consent
+            setTimeout(function() {
+                document.querySelector('.cookie-consent').classList.add('show');
+            }, 2000);
+
+            document.querySelectorAll('.cookie-buttons button').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelector('.cookie-consent').classList.remove('show');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
