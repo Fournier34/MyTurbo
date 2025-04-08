@@ -385,6 +385,43 @@
             font-weight: bold;
             margin-right: 0.5rem;
         }
+        .service-box a {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 30px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.service-box a::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.4s ease;
+}
+
+.service-box a:hover {
+  background-color: var(--secondary-color);
+  color: white;
+  transform: translateY(-3px);
+}
+
+.service-box a:hover::after {
+  left: 0;
+}
+
         
         /* Offres */
         #offres {
@@ -1207,16 +1244,10 @@ al</h3>
                     <h3>Parlons de votre projet</h3>
                     <p>Notre équipe est à votre disposition pour répondre à vos questions et vous accompagner dans la réalisation de vos projets digitaux.</p>
                     <div class="contact-details">
-                        <span><i class="fas fa-map-marker-alt"></i>123 Avenue Digitale, 75001 Paris</span>
-                        <span><i class="fas fa-phone"></i>+33 1 23 45 67 89</span>
-                        <span><i class="fas fa-envelope"></i>contact@myturbo.fr</span>
+                        <span><i class="fas fa-map-marker-alt"></i>Pic Saint Loup</span>
+                        <span><i class="fas fa-phone"></i>+33 6 31 87 18 92</span>
+                        <span><i class="fas fa-envelope"></i>fournier.maxiime@yahoo.fr</span>
                         <span><i class="fas fa-clock"></i>Lun-Ven: 9h-18h</span>
-                    </div>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
                 <div class="contact-form" data-aos="fade-left">
