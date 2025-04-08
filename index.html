@@ -559,66 +559,144 @@
 
     <!-- Services Section -->
 <section id="services">
-    <div class="container">
-        <h2 class="section-title">Nos Services</h2>
-        <h3 class="section-subtitle">Parce que c’est toujours mieux si on vous les présente.</h3>
-        <div class="services-container">
-            <div class="service-box">
-                <h3>Photo</h3>
-                <ul>
-                    <li>Portraits</li>
-                    <li>Produits</li>
-                    <li>Souvenirs</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-            <div class="service-box">
-                <h3>Création de site internets</h3>
-                <ul>
-                    <li>Vitrine</li>
-                    <li>Plateforme E Commerce</li>
-                    <li>Hébergement et maintenance</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-            <div class="service-box">
-                <h3>Événementiel</h3>
-                <ul>
-                    <li>Afterwork et repas d’entreprise</li>
-                    <li>Séminaires et congrès</li>
-                    <li>Demande sur mesure</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-            <div class="service-box">
-                <h3>Réseaux sociaux</h3>
-                <ul>
-                    <li>Création de contenu</li>
-                    <li>Gestion CM</li>
-                    <li>Social Ads</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-            <div class="service-box">
-                <h3>Formation</h3>
-                <ul>
-                    <li>WordPress</li>
-                    <li>Réseaux sociaux</li>
-                    <li>Outils CRM</li>
-                    <li>Power BI</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-            <div class="service-box">
-                <h3>Graphisme</h3>
-                <ul>
-                    <li>Logo</li>
-                    <li>Affiches</li>
-                </ul>
-                <a href="#contact" class="btn btn-outline">En savoir plus</a>
-            </div>
-        </div>
+  <style>
+    #services {
+      padding: 6rem 0;
+      background: #f9f9f9;
+    }
+
+    .services-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-box {
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .service-box:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .service-box h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #2a3990;
+    }
+
+    .service-list {
+      list-style: disc;
+      text-align: left;
+      padding-left: 1.5rem;
+      margin: 1rem 0 2rem;
+    }
+
+    .service-list li {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      color: #333;
+    }
+
+    .btn-outline {
+      display: inline-block;
+      padding: 0.75rem 1.5rem;
+      background: transparent;
+      border: 1px solid #2a3990;
+      color: #2a3990;
+      border-radius: 5px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background: #2a3990;
+      color: white;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: 2.5rem;
+      color: #333;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-weight: normal;
+      color: #666;
+    }
+  </style>
+
+  <div class="container">
+    <h2 class="section-title">Nos Services</h2>
+    <h3 class="section-subtitle">Parce que c’est toujours mieux si on vous les présente.</h3>
+    <div class="services-container">
+      <div class="service-box">
+        <h3>Photo</h3>
+        <ul class="service-list">
+          <li>Portraits</li>
+          <li>Produits</li>
+          <li>Souvenirs</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="service-box">
+        <h3>Création de site internets</h3>
+        <ul class="service-list">
+          <li>Vitrine</li>
+          <li>Plateforme E Commerce</li>
+          <li>Hébergement et maintenance</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="service-box">
+        <h3>Événementiel</h3>
+        <ul class="service-list">
+          <li>Afterwork et repas d’entreprise</li>
+          <li>Séminaires et congrès</li>
+          <li>Demande sur mesure</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="service-box">
+        <h3>Réseaux sociaux</h3>
+        <ul class="service-list">
+          <li>Création de contenu</li>
+          <li>Gestion CM</li>
+          <li>Social Ads</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="service-box">
+        <h3>Formation</h3>
+        <ul class="service-list">
+          <li>WordPress</li>
+          <li>Réseaux sociaux</li>
+          <li>Outils CRM</li>
+          <li>Power BI</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
+      <div class="service-box">
+        <h3>Graphisme</h3>
+        <ul class="service-list">
+          <li>Logo</li>
+          <li>Affiches</li>
+        </ul>
+        <a href="#contact" class="btn-outline">En savoir plus</a>
+      </div>
     </div>
+  </div>
 </section>
     <!-- Offres Section -->
     <section id="offres">
