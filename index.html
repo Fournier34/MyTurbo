@@ -1323,49 +1323,176 @@
     </section>
 
     <!-- Contact Section -->
-    <section id="contact">
-        <div class="container">
-            <div class="title-container">
-                <span class="title-emoji">📞</span>
-                <h2 class="section-title">Contact</h2>
-                <span class="title-emoji">📞</span>
+  <!-- Contact Section -->
+<section id="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Contactez-nous</h2>
+            <div class="underline"></div>
+        </div>
+        
+        <div class="contact-container">
+            <div class="contact-info">
+                <h3>Restons en contact</h3>
+                <p>N'hésitez pas à nous contacter pour toute question ou demande. Notre équipe vous répondra dans les plus brefs délais.</p>
+                
+                <div class="contact-details">
+                    <span><i class="fas fa-map-marker-alt"></i> 123 Rue Exemple, Ville, Pays</span>
+                    <span><i class="fas fa-phone"></i> +33 1 23 45 67 89</span>
+                    <span><i class="fas fa-envelope"></i> info@example.com</span>
+                    <span><i class="fas fa-clock"></i> Lun-Ven: 9h-18h</span>
+                </div>
             </div>
-            <h3 class="section-subtitle">Une question ? Un projet ? Contactez-nous pour en discuter</h3>
-            <div class="contact-container">
-                <div class="contact-info" data-aos="fade-right">
-                    <h3>Parlons de votre projet</h3>
-                    <p>Notre équipe est à votre disposition pour répondre à vos questions et vous accompagner dans la réalisation de vos projets digitaux.</p>
-                    <div class="contact-details">
-                        <span><i class="fas fa-map-marker-alt"></i>Pic Saint Loup</span>
-                        <span><i class="fas fa-phone"></i>+33 6 31 87 18 92</span>
-                        <span><i class="fas fa-envelope"></i>fournier.maxiime@yahoo.fr</span>
-                        <span><i class="fas fa-clock"></i>Lun-Ven: 9h-18h</span>
+            
+            <div class="contact-form">
+                <form id="contactForm" action="https://formspree.io/f/xoveyqdo" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nom</label>
+                        <input type="text" id="name" name="name" required>
                     </div>
-                </div>
-                <div class="contact-form" data-aos="fade-left">
-                    <form>
-                        <div class="form-group">
-                            <label for="name">Nom</label>
-                            <input type="text" id="name" placeholder="Votre nom">
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" placeholder="Votre email">
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Sujet</label>
-                            <input type="text" id="subject" placeholder="Sujet de votre message">
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" placeholder="Votre message"></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-secondary"><span>✉️</span>Envoyer</button>
-                    </form>
-                </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Envoyer
+                    </button>
+                    
+                    <div id="form-status" class="form-status"></div>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
+<!-- Ajout du JavaScript pour la gestion du formulaire -->
+<script>
+    const form = document.getElementById("contactForm");
+    const formStatus = document.getElementById("form-status");
+    
+    form.addEventListener("submit", function(ev) {
+        ev.preventDefault();
+        
+        // Afficher un message de chargement
+        formStatus.innerHTML = '<div class="loading">Envoi en cours...</div>';
+        
+        const formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: form.method,
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error("Oops! Erreur lors de l'envoi du formulaire.");
+        })
+        .then(data => {
+            // Afficher un message de succès
+            formStatus.innerHTML = '<div class="success">Message envoyé avec succès!</div>';
+            form.reset();
+            
+            // Masquer le message après 3 secondes
+            setTimeout(() => {
+                formStatus.innerHTML = '';
+            }, 3000);
+        })
+        .catch(error => {
+            // Afficher un message d'erreur
+            formStatus.innerHTML = '<div class="error">Erreur: Veuillez réessayer plus tard.</div>';
+        });
+    });
+</script>
+
+<!-- CSS supplémentaire pour les notifications du formulaire -->
+<style>
+    .form-status {
+        margin-top: 1rem;
+    }
+    
+    .form-status .loading,
+    .form-status .success,
+    .form-status .error {
+        padding: 0.75rem;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: 500;
+    }
+    
+    .form-status .loading {
+        background-color: #f5f5f5;
+        color: #333;
+    }
+    
+    .form-status .success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    
+    .form-status .error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    
+    .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: var(--transition);
+    }
+    
+    .btn-primary {
+        background-color: var(--primary-color);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-3px);
+    }
+    
+    .btn i {
+        margin-right: 0.5rem;
+    }
+    
+    .section-title {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+    
+    .section-title h2 {
+        font-size: 2.5rem;
+        color: var(--secondary-color);
+        margin-bottom: 1rem;
+    }
+    
+    .underline {
+        height: 4px;
+        width: 50px;
+        background-color: var(--primary-color);
+        margin: 0 auto;
+    }
+</style>
 
     <!-- Footer -->
     <footer id="footer">
