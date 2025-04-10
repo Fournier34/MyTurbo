@@ -1129,60 +1129,61 @@
         </div>
     </section>
 
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Contactez-Nous</h2>
-                <p>Prêt à transformer votre stratégie digitale ? Parlons-en !</p>
+  <!-- Section Contact avec Formspree intégré -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title">
+            <h2>Contactez-Nous</h2>
+            <p>Prêt à transformer votre stratégie digitale ? Parlons-en !</p>
+        </div>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i>📍</i>
+                    <div>
+                        <h3>Notre adresse</h3>
+                        <p>Sud de la France</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i>📞</i>
+                    <div>
+                        <h3>Téléphone</h3>
+                        <p>+33 6 31 87 18 92</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <i>⏰</i>
+                    <div>
+                        <h3>Heures d'ouverture</h3>
+                        <p>Lundi - Dimanche : 9h - 18h</p>
+                    </div>
+                </div>
             </div>
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i>📍</i>
-                        <div>
-                            <h3>Notre adresse</h3>
-                            <p>Sud de la France</p>
-                        </div>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/xoveyqdo" method="POST" id="contact-form">
+                    <div class="form-group">
+                        <label for="name">Nom Complet</label>
+                        <input type="text" id="name" name="name" class="form-control" required>
                     </div>
-                    <div class="contact-item">
-                        <i>📞</i>
-                        <div>
-                            <h3>Téléphone</h3>
-                            <p>+33 6 31 87 18 92</p>
-                        </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" class="form-control" required>
                     </div>
-                    <div class="contact-item">
-                        <i>⏰</i>
-                        <div>
-                            <h3>Heures d'ouverture</h3>
-                            <p>Lundi - Dimanche : 9h - 18h</p>
-                        </div>
+                    <div class="form-group">
+                        <label for="subject">Sujet</label>
+                        <input type="text" id="subject" name="subject" class="form-control" required>
                     </div>
-                </div>
-                <div class="contact-form">
-                    <form action="#" method="POST" id="contact-form">
-                        <div class="form-group">
-                            <label for="name">Nom Complet</label>
-                            <input type="text" id="name" name="name" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="subject">Sujet</label>
-                            <input type="text" id="subject" name="subject" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
-                        </div>
-                        <button type="submit" class="btn btn-submit">Envoyer Message</button>
-                    </form>
-                </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" class="form-control" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-submit">Envoyer Message</button>
+                </form>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 </span></a><!-- Footer Section -->
 <footer>
