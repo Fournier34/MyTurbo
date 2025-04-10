@@ -120,6 +120,54 @@
         .nav-links a:hover::after, .nav-links a.active::after {
             width: 100%;
         }
+        /* Styles pour la galerie d'équipe */
+.team-gallery {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.team-member {
+    text-align: center;
+    transition: all 0.3s;
+}
+
+.team-member:hover {
+    transform: translateY(-10px);
+}
+
+.team-member img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    margin-bottom: 15px;
+    transition: all 0.5s;
+}
+
+.team-member:hover img {
+    transform: scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.team-member h4 {
+    font-size: 1.2rem;
+    margin-bottom: 5px;
+    color: var(--light-color);
+}
+
+.team-member p {
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+/* Responsive pour la galerie d'équipe */
+@media screen and (max-width: 768px) {
+    .team-gallery {
+        grid-template-columns: 1fr;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+}
         /* Menu mobile */
 .mobile-menu-btn {
     display: none;
