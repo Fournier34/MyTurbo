@@ -1218,7 +1218,7 @@
     </div>
 </section>
 
-</span></a><!-- Footer Section -->
+<!-- Footer Section -->
 <footer>
     <div class="container">
         <div class="footer-grid">
@@ -1257,10 +1257,10 @@
             <div class="footer-subscribe">
                 <h3>Newsletter</h3>
                 <p>Recevez nos derniers conseils et actualités en marketing digital pour rester à la pointe des tendances.</p>
-                <form action="#" method="POST" class="subscribe-form" id="newsletter-form">
-                    <input type="email" name="email" placeholder="Votre email" required>
-                    <button type="submit" aria-label="S'abonner">→</button>
-                </form>
+                <form action="https://formspree.io/f/xoveyqdo" method="POST" class="subscribe-form" id="newsletter-form">
+                <input type="email" name="email" placeholder="Votre email" required>
+                <button type="submit" aria-label="S'abonner">→</button>
+            </form>
                 <div class="privacy-note">
                     <p>En vous inscrivant, vous acceptez notre <a href="#privacy">politique de confidentialité</a>.</p>
                 </div>
@@ -1510,21 +1510,63 @@ footer::before {
     
     <script>
         // Smooth scrolling pour les liens d'ancrage
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop,
-                        behavior: 'smooth'
-                    });
-                }
+        // Gestion du menu mobile
+const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+const navLinks = document.querySelector('.nav-links');
+
+if (mobileMenuBtn) {
+    mobileMenuBtn.addEventListener('click', function() {
+        navLinks.classList.toggle('show');
+    });
+}
+
+// Fermer le menu lors d'un clic sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', function() {
+        navLinks.classList.remove('show');
+    });
+});
+
+// Smooth scrolling pour les liens d'ancrage
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        const targetId = this.getAttribute('href');
+        const targetElement = document.querySelector(targetId);
+        
+        if (targetElement) {
+            window.scrollTo({
+                top: targetElement.offsetTop,
+                behavior: 'smooth'
             });
-        });
+        }
+    });
+});
+
+// Ajout d'une classe active au lien de navigation lors du défilement
+window.addEventListener('scroll', function() {
+    const sections = document.querySelectorAll('section');
+    const navLinks = document.querySelectorAll('.nav-links a');
+    
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        
+        if (pageYOffset >= sectionTop - 200) {
+            current = section.getAttribute('id');
+        }
+    });
+    
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${current}`) {
+            link.classList.add('active');
+        }
+    });
+});
         
         // Gestion du formulaire de contact
         const contactForm = document.getElementById('contact-form');
