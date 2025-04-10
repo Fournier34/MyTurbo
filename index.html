@@ -1569,31 +1569,65 @@ window.addEventListener('scroll', function() {
 });
         
         // Gestion du formulaire de contact
-        const contactForm = document.getElementById('contact-form');
-        if (contactForm) {
-            contactForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Ici, vous pourriez ajouter du code pour envoyer les données à un serveur
-                // Pour l'instant, nous affichons juste un message de confirmation
-                alert('Merci pour votre message ! Nous vous répondrons dans les plus brefs délais.');
-                contactForm.reset();
-            });
-        }
+        <script>
+    // Gestion du menu mobile
+    const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (mobileMenuBtn) {
+        mobileMenuBtn.addEventListener('click', function() {
+            navLinks.classList.toggle('show');
+        });
+    }
+
+    // Fermer le menu lors d'un clic sur un lien
+    document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', function() {
+            navLinks.classList.remove('show');
+        });
+    });
+
+    // Smooth scrolling pour les liens d'ancrage
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                window.scrollTo({
+                    top: targetElement.offsetTop,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Ajout d'une classe active au lien de navigation lors du défilement
+    window.addEventListener('scroll', function() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
         
-        // Gestion du formulaire de newsletter
-        const newsletterForm = document.getElementById('newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Ici, vous pourriez ajouter du code pour envoyer les données à un serveur
-                // Pour l'instant, nous affichons juste un message de confirmation
-                alert('Merci pour votre inscription à notre newsletter !');
-                newsletterForm.reset();
-            });
-        }
+        let current = '';
         
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.clientHeight;
+            
+            if (pageYOffset >= sectionTop - 200) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${current}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+</script>
         // Ajout d'une classe active au lien de navigation lors du défilement
         window.addEventListener('scroll', function() {
             const sections = document.querySelectorAll('section');
